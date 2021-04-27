@@ -1,6 +1,5 @@
 <template>
   <div>
- 
     <b-form @submit="sendData" @reset="reset">
       <b-form-group id="input-group-2" label="Başlık:" label-for="input-2">
         <b-form-input
@@ -19,20 +18,22 @@
           required
         ></b-form-textarea>
       </b-form-group>
-      <b-button type="submit" variant="primary">Gönder</b-button>
-      <b-button type="reset" variant="danger">Sıfırla</b-button>
+      <div class="float-right">
+        <b-button type="reset">Sıfırla</b-button>
+        <b-button type="submit" class="ml-2">Gönder</b-button>
+      </div>
     </b-form>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'UserForm',
+  name: "UserForm",
   props: {
     editPost: {
       type: Object,
-      default: function() {
-        return { id: '', title: '', body: '' };
+      default: function () {
+        return { id: "", title: "", body: "" };
       },
     },
     update: {
@@ -42,7 +43,7 @@ export default {
   },
   data() {
     return {
-      post: this.editPost || { id: '', title: '', body: '' },
+      post: this.editPost || { id: "", title: "", body: "" },
     };
   },
   methods: {
@@ -51,8 +52,8 @@ export default {
       let requestOptions = {};
       if (this.update) {
         requestOptions = {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(this.post),
         };
         fetch(
@@ -61,26 +62,26 @@ export default {
         )
           .then((response) => response.json())
           .then((data) => {
-            this.$emit('updated', data);
+            this.$emit("updated", data);
           });
       } else {
         requestOptions = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(this.post),
         };
         fetch(`https://jsonplaceholder.typicode.com/posts`, requestOptions)
           .then((response) => response.json())
           .then((data) => {
-            this.$emit('created', data);
+            this.$emit("created", data);
           });
       }
     },
     reset(event) {
       event.preventDefault();
-      this.post.id = '';
-      this.post.title = '';
-      this.post.body = '';
+      this.post.id = "";
+      this.post.title = "";
+      this.post.body = "";
     },
   },
 };

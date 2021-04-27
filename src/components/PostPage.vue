@@ -1,19 +1,18 @@
 <template>
   <div class="container">
-    <PostTable />
-   
+    <PostList />
   </div>
 </template>
 
 <script>
-import PostTable from './PostTable.vue';
+import PostList from './PostList.vue';
 export default {
   name: 'UserPage',
   props: {
     msg: String,
   },
   components: {
-    PostTable,
+    PostList,
   },
   methods: {
    
